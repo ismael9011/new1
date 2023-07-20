@@ -1,43 +1,21 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import Review
+from .models import Review, Properties
 
-#need to set up HTML file for this code to work. Not done yet.
-# def home(request):
-#     return render(
-#         request,
-#         'newapp/newapp.html',
-#         {
-#             name : Review.name,
-#             date : Review.pub_date,
-#             rating : Review.rating,
-#             text : Review.text
-#         }
-#     )
+# view gets request and returns HTTPresponse or HTML rendered in the folder 'templates'
 
-
-
-
+# get request for home page, appends fields to models to then use in home.html in the folder 'templates', then render home.html
 def home(request):
     latest_reviews = Review.objects.order_by('-pub_date')
-    output = ""
-    for review in latest_reviews:
-        name = review.name
-        date = review.pub_date.strftime("%H:%M:%S")
-        rating = str(review.rating)
-        text = review.text
-        complete = "Name: %s\nDate Posted: %s\nRating: %s\nReview: %s" % (
-            name,
-            date,
-            rating,
-            text,
-        )
-        #complete = "Name: " + name + "date posted: " + date + "rating: " + rating + "Review: " + text 
-        output += complete
-    return HttpResponse(output)
-#     #return HttpResponse("Name: {review.name}<br>Rating: {review.rating}<br>Review: {review.text}<br> Posted: {review.pub_date} ")
-     
-    
+    # IMPORTANT: Assuming you want to display the first property in the template
+    try:
+        property = Properties.objects.first()
+    except Properties.DoesNotExist:
+        property = None
+
+    return render(request, 'home.html', {'latest_reviews': latest_reviews, 'property': property})
+
+
 
 #def index(request):
     review = Review.objects.all()

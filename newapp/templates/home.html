@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Home</h1>
+    <!--Check if property exists, and display property name and the associated picture-->
+    {% if property %}
+        <h2>{{ property.name }}</h2>
+        <img src="{{ property.picture.url }}" alt="{{ property.name }} Image" width="300">
+    {% endif %}
+    <h3>Property Review:</h3>
+    {% for review in latest_reviews %}
+        <h3>{{ review.name }}</h3>
+        <p>Date Posted: {{ review.pub_date|date:"H:i:s" }}</p>
+        <p>Rating: {{ review.rating }}</p>
+        <p>Review: {{ review.text }}</p>
+        <hr>
+    {% endfor %}
+</body>
+</html>
