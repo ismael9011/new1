@@ -12,4 +12,9 @@ class Properties(models.Model):
     name = models.CharField(max_length=200)
     picture = models.ImageField(upload_to='property_images/')
     #currently adding address field in
-   # address = models.CharField(max_length=200, default= 'address_filler')
+    address = models.CharField(max_length=200, default= 'address_filler')
+    hchoices = (
+    ('a', 'Condo'),
+    ('b', 'House'),
+    )
+    type = models.CharField(max_length=1, choices=hchoices, default= 'a')

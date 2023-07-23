@@ -9,7 +9,11 @@
     {% if property %}
         <h2>{{ property.name }}</h2>
         <img src="{{ property.picture.url }}" alt="{{ property.name }} Image" width="300">
-    {% endif %}
+        <h4>Address: {{ property.address }}</h4>
+      <!--property.type would display a or b instead, hence we use get type display-->    
+        <h4>Property Type: {{ property.get_type_display }}</h4>
+        <hr>
+        {% endif %}
     <h3>Property Review:</h3>
     {% for review in latest_reviews %}
         <h3>{{ review.name }}</h3>
