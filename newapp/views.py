@@ -22,3 +22,4 @@ def home(request):
     output = "<br>".join([each_review.review_text for each_review in review])
 
     return HttpResponse(output)
+
