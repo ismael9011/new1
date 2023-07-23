@@ -11,3 +11,5 @@ class Review(models.Model):
 class Properties(models.Model):
     name = models.CharField(max_length=200)
     picture = models.ImageField(upload_to='property_images/')
+    #currently adding address field in
+   # address = models.CharField(max_length=200, default= 'address_filler')

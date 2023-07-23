@@ -13,7 +13,7 @@
     <h3>Property Review:</h3>
     {% for review in latest_reviews %}
         <h3>{{ review.name }}</h3>
-        <p>Date Posted: {{ review.pub_date|date:"H:i:s" }}</p>
+        <p>Date Posted: {{ review.pub_date }}</p>
         <p>Rating: {{ review.rating }}</p>
         <p>Review: {{ review.text }}</p>
         <hr>

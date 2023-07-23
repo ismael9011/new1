@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Review, Properties
 
+
 # view gets request and returns HTTPresponse or HTML rendered in the folder 'templates'
 
 # get request for home page, appends fields to models to then use in home.html in the folder 'templates', then render home.html
