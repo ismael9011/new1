@@ -11,3 +11,12 @@ class Review(models.Model):
 class Properties(models.Model):
     name = models.CharField(max_length=200)
     picture = models.ImageField(upload_to='property_images/')
+    #currently adding address field in
+    address = models.CharField(max_length=200, default= 'address_filler')
+    #housing selection for the property type field
+    hchoices = (
+    ('a', 'Condo'),
+    ('b', 'House'),
+    )
+    type = models.CharField(max_length=1, choices=hchoices, default= 'a')
+    distance = models.DecimalField(decimal_places= 2, max_digits= 5, default=1.00) 
