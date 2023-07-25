@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Review, Properties
 
 
@@ -8,15 +8,23 @@ from .models import Review, Properties
 # get request for home page, appends fields to models to then use in home.html in the folder 'templates', then render home.html
 def home(request):
     latest_reviews = Review.objects.order_by('-pub_date')
-    # IMPORTANT: Assuming you want to display the first property in the template
+    # IMPORTANT: get all properties in the properties model
     try:
-        property = Properties.objects.first()
+        properties = Properties.objects.all()
     except Properties.DoesNotExist:
-        property = None
+        properties = None
 
-    return render(request, 'home.html', {'latest_reviews': latest_reviews, 'property': property})
+    return render(request, 'home.html', {'latest_reviews': latest_reviews, 'properties': properties})
 
+def property_detail(request, property_id):
+    # Get the property with the specified property_id from the database
+    property_instance = get_object_or_404(Properties, id=property_id)
+    
+    # Get the reviews associated with the property using the reverse relationship
+    reviews = property_instance.review_set.all()
 
+    # Pass the property_instance to the template for rendering
+    return render(request, 'property_detail.html', {'property': property_instance, 'reviews': reviews})
 
 #def index(request):
     review = Review.objects.all()
